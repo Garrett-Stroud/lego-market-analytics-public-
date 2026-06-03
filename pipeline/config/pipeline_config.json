@@ -1,0 +1,14 @@
+{
+  "active": {
+    "limit": 200,
+    "max_pages": 2
+  },
+  "sold": {
+    "limit": 200,
+    "max_pages": 3
+  },
+  "filters": {
+    "min_profit": 0,
+    "min_score": 0
+  }
+}

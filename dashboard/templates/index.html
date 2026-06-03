@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Arbitrage Dashboard</title>
+    <link rel="stylesheet" href="/static/dashboard.css">
+    <script defer src="/static/dashboard.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1>LEGO Arbitrage Dashboard</h1>
+        <button id="refresh-btn">Refresh</button>
+    </header>
+
+    <div class="grid">
+        {% for opp in opportunities %}
+        <div class="card" data-id="{{ opp.id }}">
+            <img src="{{ opp.image }}" class="thumb">
+
+            <div class="info">
+                <h2>{{ opp.title }}</h2>
+                <p class="price">${{ opp.price }}</p>
+                <p class="score">Score: {{ opp.score }}</p>
+            </div>
+
+            <div class="actions">
+                <button class="buy-btn">Buy</button>
+                <button class="delete-btn">Delete</button>
+                <button class="history-btn">History</button>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- History Modal -->
+    <div id="history-modal" class="modal hidden">
+        <div class="modal-content">
+            <h2>History</h2>
+            <ul id="history-list"></ul>
+            <button id="close-modal">Close</button>
+        </div>
+    </div>
+
+</body>
+</html>

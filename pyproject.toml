@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=65.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lego-market-analytics"
+version = "0.1.0"
+description = "A full-stack data engineering + machine learning pipeline for LEGO market analytics."
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+authors = [
+    { name = "Garrett" }
+]
+
+dependencies = [
+    "aiohttp==3.9.5",
+    "fastapi==0.111.0",
+    "uvicorn==0.30.1",
+    "pydantic==1.10.15",
+    "pandas==2.2.2",
+    "numpy==1.26.4",
+    "python-dateutil==2.9.0.post0",
+    "requests==2.32.3",
+    "tqdm==4.66.4",
+    "joblib==1.4.2",
+    "scikit-learn==1.5.0",
+    "jinja2==3.1.4",
+    "python-dotenv==1.0.1",
+    "typing-extensions==4.12.2"
+]
+
+[project.urls]
+Homepage = "https://github.com/Garrett-Stroud/lego-market-analytics-public-"
+Repository = "https://github.com/Garrett-Stroud/lego-market-analytics-public-"
+
+[tool.setuptools]
+package-dir = {"" = "."}
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = [
+    "pipeline*",
+    "models*",
+    "dashboard*",
+    "tests*"
+]

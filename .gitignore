@@ -1,0 +1,27 @@
+# IDE
+.idea/
+.vscode/
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Virtual environments
+.venv/
+venv/
+
+# Environment variables
+.env
+.env.*
+
+# Frontend generated files
+.svelte-kit/
+node_modules/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Data
+data/

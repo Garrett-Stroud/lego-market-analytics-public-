@@ -1,0 +1,22 @@
+@import "tailwindcss";
+@tailwind components;
+@tailwind utilities;
+
+html {
+    font-family: Inter, system-ui, sans-serif;
+}
+
+body {
+    @apply bg-gray-50 text-gray-900;
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.25s ease-out;
+}
