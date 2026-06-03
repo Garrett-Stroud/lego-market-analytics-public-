@@ -112,3 +112,78 @@ Dashboard / API
   "buy_url": "https://ebay.com/itm/12345"
 }
 ```
+
+## How To Run Locally
+
+Follow these steps to run the pipeline demo, API backend, and dashboard locally.
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/Garrett-Stroud/lego-market-analytics-public-.git
+cd lego-market-analytics-public-
+```
+
+### 2. Create a Virtual Environment
+```bash
+python -m venv .venv
+```
+Activate it:
+```bash
+.venv\Scripts\activate
+```
+
+### 3. Install Python Dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Initialize the Local SQLite Database
+```bash
+python -m pipeline.storage.init_db
+This creates the schema defined in pipeline/storage/schema.sql
+```
+
+### 5. Run the Pipeline Demo (End‑to‑End)
+```bash
+python -m pipeline.pipeline_demo_run
+```
+
+### 6. Start the FastAPI Backend
+```bash
+uvicorn dashboard.api.main:app --reload --port 8000
+```
+API will be available at:
+```bash
+http://localhost:8000
+```
+
+### 7. Start the SvelteKit Dashboard
+Navigate to the UI folder:
+```bash
+cd dashboard/ui
+npm install
+npm run dev
+```
+
+Dashboard will be available at:
+```bash
+http://localhost:5173
+```
+
+### 8. View the Full System
+With both servers running:
+
+The dashboard fetches data from the FastAPI backend
+
+The backend reads from the SQLite database
+
+The pipeline demo populates example snapshots and opportunities
+
+This gives you a complete, local, end‑to‑end environment.
+
+
+
+
+
+
