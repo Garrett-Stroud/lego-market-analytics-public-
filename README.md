@@ -121,6 +121,9 @@ Follow these steps to run the pipeline demo, API backend, and dashboard locally.
 
 ```bash
 git clone https://github.com/Garrett-Stroud/lego-market-analytics-public-.git
+```
+Navigate to correct directory
+```bash
 cd lego-market-analytics-public-
 ```
 
