@@ -117,11 +117,6 @@ Dashboard / API
 ### Dashboard
 ![Dashboard](docs/dashboard.png)
 
-### Opportunity Details
-![Details](docs/details.png)
-
-### Sales History Modal
-![History](docs/history.png)
 
 ## How To Run Locally
 
