@@ -113,6 +113,16 @@ Dashboard / API
 }
 ```
 
+## Example Frontend Image
+### Dashboard
+![Dashboard](docs/dashboard.png)
+
+### Opportunity Details
+![Details](docs/details.png)
+
+### Sales History Modal
+![History](docs/history.png)
+
 ## How To Run Locally
 
 Follow these steps to run the pipeline demo, API backend, and dashboard locally.
