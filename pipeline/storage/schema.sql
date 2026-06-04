@@ -1,6 +1,18 @@
+-- ============================================================
+-- RUNS TABLE
+-- ============================================================
+CREATE TABLE IF NOT EXISTS runs (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- ============================================================
+-- JOINED SNAPSHOTS TABLE
+-- ============================================================
 CREATE TABLE IF NOT EXISTS joined_snapshots (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    run_id TEXT,
+    run_id INTEGER NOT NULL,
+
     set_number TEXT,
     rb_name TEXT,
     rb_theme TEXT,
@@ -21,13 +33,22 @@ CREATE TABLE IF NOT EXISTS joined_snapshots (
     volatility REAL,
     trend REAL,
 
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (run_id) REFERENCES runs(id)
 );
 
+-- ============================================================
+-- OPPORTUNITIES TABLE
+-- ============================================================
 CREATE TABLE IF NOT EXISTS opportunities (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    run_id TEXT,
-    product_key TEXT,
+    run_id INTEGER NOT NULL,
+    product_key TEXT NOT NULL,
+    product_title TEXT,
+    image_url TEXT,
+
 
     buy_source TEXT,
     buy_price REAL,
@@ -42,5 +63,7 @@ CREATE TABLE IF NOT EXISTS opportunities (
     score REAL,
     score_details TEXT,
 
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (run_id) REFERENCES runs(id)
 );

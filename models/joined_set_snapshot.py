@@ -9,6 +9,7 @@ class JoinedSetSnapshot(BaseModel):
     rb_theme: Optional[str]
     rb_year: Optional[int]
     rb_num_parts: Optional[int]
+    rb_image_url: Optional[str] = None
 
     # Active listing stats
     active_lowest: Optional[float]

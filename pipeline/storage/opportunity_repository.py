@@ -1,14 +1,37 @@
 import json
-from models.opportunity import Opportunity
+
 from pipeline.storage.db import get_connection
+
 
 
 class OpportunityRepository:
 
     # -----------------------------
+    # Create a new run
+    # -----------------------------
+    def create_run(self) -> int:
+        with get_connection() as conn:
+            cur = conn.cursor()
+
+            cur.execute("""
+                INSERT INTO runs (created_at)
+                VALUES (CURRENT_TIMESTAMP)
+            """)
+
+            conn.commit()
+            return cur.lastrowid
+
+    # -----------------------------
     # Save
     # -----------------------------
-    def save(self, run_id: str, opp: Opportunity):
+    def save(self, run_id: str, opp):
+
+        # If it's a dict, use it directly
+        if isinstance(opp, dict):
+            data = opp
+        else:
+            data = opp.model_dump()
+
         with get_connection() as conn:
             cur = conn.cursor()
 
@@ -17,21 +40,24 @@ class OpportunityRepository:
                     run_id, product_key,
                     buy_source, buy_price, buy_url,
                     sell_source, sell_price, sell_url,
-                    profit, roi, score, score_details
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    profit, roi, score, score_details,
+                    product_title, image_url
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """, (
                 run_id,
-                opp.product_key,
-                opp.buy_source,
-                opp.buy_price,
-                opp.buy_url,
-                opp.sell_source,
-                opp.sell_price,
-                opp.sell_url,
-                opp.profit,
-                opp.roi,
-                opp.score,
-                json.dumps(opp.score_details),
+                data.get("product_key"),
+                data.get("buy_source"),
+                data.get("buy_price"),
+                data.get("buy_url"),
+                data.get("sell_source"),
+                data.get("sell_price"),
+                data.get("sell_url"),
+                data.get("profit"),
+                data.get("roi"),
+                data.get("score"),
+                json.dumps(data.get("score_details") or {}),
+                data.get("product_title"),
+                data.get("image_url"),
             ))
 
             conn.commit()
@@ -58,14 +84,21 @@ class OpportunityRepository:
     # -----------------------------
     def _map_row(self, r):
         return {
+            "id": r["id"],
             "product_key": r["product_key"],
+
+            # Correct fields
+            "title": r["product_title"],
+            "image_url": r["image_url"],
+
             "buy_price": r["buy_price"],
             "sell_price": r["sell_price"],
             "profit": r["profit"],
             "roi": r["roi"],
             "score": r["score"],
             "buy_url": r["buy_url"],
-            "score_details": json.loads(r["score_details"]),
+            "sell_url": r["sell_url"],
+            "score_details": json.loads(r["score_details"]) if r["score_details"] else {},
         }
 
     # -----------------------------

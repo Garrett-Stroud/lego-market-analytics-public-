@@ -34,6 +34,7 @@ class ActiveSoldJoiner:
                 rb_theme=rb.get("theme"),
                 rb_year=rb.get("year"),
                 rb_num_parts=rb.get("num_parts"),
+                rb_image_url=f"https://cdn.rebrickable.com/media/sets/{set_num}.jpg",
 
                 active_lowest=active_lowest,
                 active_median=active_median,

@@ -1,7 +1,7 @@
+from statistics import median
 from models.active_item import CanonicalItem
 from models.joined_set_snapshot import JoinedSetSnapshot
 from models.opportunity import Opportunity
-
 
 def score_snapshot(
     snapshot: JoinedSetSnapshot,
@@ -28,13 +28,17 @@ def score_snapshot(
     return Opportunity(
         product_key=snapshot.set_number,
 
+        # NEW: Rebrickable metadata
+        product_title=snapshot.rb_name,
+        image_url=snapshot.rb_image_url,
+
         buy_source="ebay",
         buy_price=buy_price,
         buy_url=buy.url,
 
         sell_source="ebay",
         sell_price=sell_price,
-        sell_url=None,  # no sell URL for sold median
+        sell_url=None,
 
         profit=profit,
         roi=roi,

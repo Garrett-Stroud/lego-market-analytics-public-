@@ -34,10 +34,11 @@
     }
 
     function roiColor(roi) {
-        if (roi > 2) return "text-green-600 font-semibold";
-        if (roi > 1) return "text-yellow-600 font-semibold";
-        return "text-red-600 font-semibold";
-    }
+    if (roi >= 0.50) return "text-green-600 font-semibold";   // 50%+
+    if (roi >= 0.20) return "text-yellow-600 font-semibold";  // 20–50%
+    return "text-red-600 font-semibold";                      // <20%
+}
+
 
     onMount(async () => {
         try {
@@ -225,44 +226,81 @@
     <!-- CARD GRID -->
     <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8 animate-fade-in">
         {#each sorted as opp}
-            <div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-6 space-y-4
-                        hover:-translate-y-1 hover:shadow-lg transition-all duration-200">
+    <div
+        class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-6 space-y-4
+               hover:-translate-y-1 hover:shadow-xl transition-all duration-200">
 
-                <div class="flex justify-between items-center">
-                    <h3 class="text-lg font-semibold">{opp.product_key}</h3>
-                    <span class="px-2 py-1 text-sm rounded-md bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300">
-                        Score {opp.score.toFixed(2)}
-                    </span>
-                </div>
+        <!-- IMAGE -->
+        {#if opp.image_url}
+            <img
+                src={opp.image_url}
+                alt={opp.title}
+                class="w-full h-40 object-contain rounded-md mb-3 bg-gray-50 dark:bg-gray-900 p-2"
+                loading="lazy"
+            />
+        {/if}
 
-                <div class="text-sm space-y-1">
-                    <div><strong>Buy:</strong> {formatMoney(opp.buy_price)}</div>
-                    <div><strong>Sell:</strong> {formatMoney(opp.sell_price)}</div>
-                    <div class="{roiColor(opp.profit)}">
-                        <strong>Profit:</strong> {formatMoney(opp.profit)}
-                    </div>
-                    <div class="{roiColor(opp.roi)}">
-                        <strong>ROI:</strong> {opp.roi.toFixed(2)}</div>
-                </div>
-
-                <div class="flex gap-3 pt-2">
-                    <button
-                        class="flex-1 px-3 py-2 rounded-md bg-gray-900 text-white hover:bg-gray-700 transition"
-                        onclick={() => selected = opp}
-                    >
-                        Details
-                    </button>
-
-                    <a
-                        href={opp.buy_url}
-                        target="_blank"
-                        class="flex-1 px-3 py-2 rounded-md bg-gradient-to-r from-blue-500 to-purple-600 text-white text-center hover:opacity-90 transition"
-                    >
-                        Buy
-                    </a>
-                </div>
+        <!-- TITLE + SET NUMBER + SCORE BADGE -->
+        <div class="flex justify-between items-start">
+            <div>
+                <h3 class="text-lg font-semibold leading-tight">{opp.title}</h3>
+                <div class="text-xs text-gray-500 dark:text-gray-400">{opp.product_key}</div>
             </div>
-        {/each}
+
+            <span class="px-2 py-1 text-sm rounded-md bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300">
+                Score {opp.score.toFixed(2)}
+            </span>
+        </div>
+
+        <!-- PRICE + PROFIT + ROI -->
+        <div class="text-sm space-y-1 pt-2">
+
+            <div class="flex justify-between">
+                <strong>Buy:</strong>
+                <span>{formatMoney(opp.buy_price)}</span>
+            </div>
+
+            <div class="flex justify-between">
+                <strong>Sell:</strong>
+                <span>{formatMoney(opp.sell_price)}</span>
+            </div>
+
+            <div class="flex justify-between {roiColor(opp.profit)}">
+                <strong>Profit:</strong>
+                <span>{formatMoney(opp.profit)}</span>
+            </div>
+
+            <div class="flex justify-between {roiColor(opp.roi)}">
+                <strong>ROI:</strong>
+                <span>{(opp.roi * 100).toFixed(1)}%</span>
+            </div>
+
+            <div class="flex justify-between text-gray-600 dark:text-gray-300">
+                <strong>Margin:</strong>
+                <span>{(opp.profit / opp.sell_price * 100).toFixed(1)}%</span>
+            </div>
+        </div>
+
+        <!-- ACTION BUTTONS -->
+        <div class="flex gap-3 pt-4">
+            <button
+                class="flex-1 px-3 py-2 rounded-md bg-gray-900 text-white hover:bg-gray-700 transition"
+                onclick={() => selected = opp}
+            >
+                Details
+            </button>
+
+            <a
+                href={opp.buy_url}
+                target="_blank"
+                class="flex-1 px-3 py-2 rounded-md bg-gradient-to-r from-blue-500 to-purple-600 text-white text-center hover:opacity-90 transition"
+            >
+                Buy
+            </a>
+        </div>
+    </div>
+{/each}
+
     </div>
 
 {/if}
@@ -273,8 +311,9 @@
     <div class="bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-200 dark:border-gray-700 w-full max-w-2xl p-6 space-y-6">
 
         <h3 class="text-xl font-bold">
-            {selected.product_key} — Run-to-run metrics
-        </h3>
+    {selected.title} — Run-to-run metrics
+</h3>
+
 
         {#if history.length === 0}
             <div class="text-sm text-gray-500 dark:text-gray-400">

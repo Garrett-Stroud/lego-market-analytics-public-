@@ -1,9 +1,12 @@
 {
   "product_key": "75192-1",
+  "product_title": "LEGO Millennium Falcon",
   "buy_price": 649.99,
   "sell_price": 720.50,
   "profit": 70.51,
   "roi": 0.108,
   "score": 0.87,
-  "buy_url": "https://ebay.com/itm/12345"
+  "buy_url": "https://ebay.com/itm/12345",
+  "image_url": "https://cdn.rebrickable.com/media/sets/75192-1.jpg"
+
 }

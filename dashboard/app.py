@@ -4,7 +4,7 @@ from pipeline.storage.opportunity_storage import (
     record_event,
     get_history,
 )
-from core.db import get_conn
+from pipeline.db import get_conn
 
 app = Flask(__name__)
 
@@ -15,7 +15,7 @@ def index():
         {
             "id": r[0],
             "product_key": r[1],
-            "title": r[2],
+            "title": r[2],  # now product_title
             "buy_source": r[3],
             "buy_price": r[4],
             "sell_source": r[5],

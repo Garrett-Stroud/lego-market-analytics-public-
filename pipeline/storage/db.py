@@ -1,10 +1,10 @@
-from pathlib import Path
+from pipeline.paths import DB_PATH
 import sqlite3
-from core.paths import DATA_DIR
-
 
 def get_connection():
-    db_path = DATA_DIR / "arbitrage.db"
-    conn = sqlite3.connect(db_path)
+    # Ensure parent directory exists
+    DB_PATH.parent.mkdir(parents=True, exist_ok=True)
+
+    conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
     return conn

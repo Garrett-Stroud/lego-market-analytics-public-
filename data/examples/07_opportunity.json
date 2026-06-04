@@ -1,0 +1,15 @@
+{
+  "product_key": "10294-1",
+  "product_title": "LEGO Titanic",
+  "buy_source": "ebay",
+  "buy_price": 520.00,
+  "buy_url": "https://ebay.com/itm/55555",
+  "sell_source": "amazon",
+  "sell_price": 650.00,
+  "sell_url": "https://amazon.com/dp/55555",
+  "profit": 130.00,
+  "roi": 0.25,
+  "score": 0.91,
+  "image_url": "https://cdn.rebrickable.com/media/sets/10294-1.jpg",
+  "score_details": {}
+}

@@ -22,7 +22,8 @@ class OpportunityStorage:
             rows = [
                 (
                     o.product_key,
-                    getattr(o, "title", None),
+                    getattr(o, "product_title", None),
+
                     o.buy_source,
                     o.buy_price,
                     o.sell_source,
@@ -40,7 +41,7 @@ class OpportunityStorage:
 
             cur.executemany("""
                 INSERT INTO opportunities (
-                    product_key, title, buy_source, buy_price,
+                    product_key, product_title, buy_source, buy_price,
                     sell_source, sell_price, profit, roi, score,
                     score_details, buy_url, sell_url, created_at
                 )
@@ -57,7 +58,7 @@ class OpportunityStorage:
             cur = conn.cursor()
 
             cur.execute("""
-                SELECT id, product_key, title, buy_source, buy_price,
+                SELECT id, product_key, product_title, buy_source, buy_price,
                        sell_source, sell_price, profit, roi, score,
                        score_details, buy_url, sell_url, created_at
                 FROM opportunities

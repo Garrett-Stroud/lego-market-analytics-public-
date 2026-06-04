@@ -1,0 +1,16 @@
+{
+  "product_key": "10316-1",
+  "product_title": "LEGO Rivendell",
+  "buy_source": "facebook",
+  "buy_price": 380.00,
+  "buy_url": "https://facebook.com/marketplace/item/77777",
+  "sell_source": "amazon",
+  "sell_price": 500.00,
+  "sell_url": "https://amazon.com/dp/77777",
+  "profit": 120.00,
+  "roi": 0.315,
+  "score": 0.88,
+  "image_url": "https://cdn.rebrickable.com/media/sets/10316-1.jpg",
+
+  "score_details": {}
+}
