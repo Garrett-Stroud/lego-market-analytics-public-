@@ -1,4 +1,5 @@
-from services.canonical.helpers.prices import normalize_price, compute_total_price
+from pipeline.canonicalization.prices import normalize_price, compute_total_price
+
 
 def test_normalize_price_numeric():
     assert normalize_price(12.5) == 12.5

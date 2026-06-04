@@ -1,7 +1,7 @@
 from fastapi import APIRouter
-from services.storage.snapshot_repository import SnapshotRepository
-from services.storage.opportunity_repository import OpportunityRepository
 from dashboard.api.dto.run_dto import RunDTO
+from pipeline.storage.opportunity_repository import OpportunityRepository
+from pipeline.storage.snapshot_repository import SnapshotRepository
 
 router = APIRouter(prefix="/runs", tags=["runs"])
 

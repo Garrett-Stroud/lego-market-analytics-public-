@@ -1,5 +1,5 @@
 from flask import Flask, render_template, jsonify, request
-from services.storage.opportunity_storage import (
+from pipeline.storage.opportunity_storage import (
     list_opportunities,
     record_event,
     get_history,

@@ -1,6 +1,6 @@
 from fastapi import APIRouter
-from services.storage.opportunity_repository import OpportunityRepository
 from dashboard.api.dto.opportunity_dto import OpportunityDTO
+from pipeline.storage.opportunity_repository import OpportunityRepository
 
 router = APIRouter(prefix="/opportunities", tags=["opportunities"])
 

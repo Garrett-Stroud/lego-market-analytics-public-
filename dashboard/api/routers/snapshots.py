@@ -1,6 +1,6 @@
 from fastapi import APIRouter
-from services.storage.snapshot_repository import SnapshotRepository
 from dashboard.api.dto.snapshot_dto import SnapshotDTO
+from pipeline.storage.snapshot_repository import SnapshotRepository
 
 router = APIRouter(prefix="/snapshots", tags=["snapshots"])
 
